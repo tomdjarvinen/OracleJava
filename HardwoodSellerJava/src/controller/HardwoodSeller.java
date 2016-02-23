@@ -30,11 +30,29 @@ public class HardwoodSeller {
 		woodTypes.add(new WoodItem("Wenge", 5., 22.35));
 		woodTypes.add(new WoodItem("White Oak", 2.3, 6.70));
 		woodTypes.add(new WoodItem("Sawdust", 1., 1.5));
-
+		/*
+		try {
+			readInputFile("testOrder.txt");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 	
-	public static void readInputFile(String inputFilePath) {
+	public static void readInputFile(String inputFilePath) throws FileNotFoundException{
 
+		Scanner input = new Scanner(new File(inputFilePath)).useDelimiter(";");
+		String name = input.next();
+		String address = input.next();
+		String date = input.nextLine();
+		System.out.println(name + address + date);
+		List<WoodOrder> orders = new ArrayList<WoodOrder>();
+		while(input.hasNext())
+		{
+			input.useDelimiter("\\p{Punct}");
+			orders.add(new WoodOrder(input.next(), input.nextInt()));
+		}
 	}
 	
 	public Double deliveryTime(){
