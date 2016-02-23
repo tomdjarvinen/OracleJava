@@ -1,3 +1,5 @@
+Name: Thomas Jarvinen
+NetID: tdj130030
 Welcome.
 
 You have sucessfully obtained a copy of the contents in the oracle repository.
