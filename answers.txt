@@ -1,0 +1,9 @@
+(a)10
+(b)2/17/16
+(c)".classpath", ".gitattributs", ".gitignore", ".project", "README.txt.txt", "WoodItem.java", "HardwoodSeller.java"
+(d)HardwoodSeller.Java was not modified, though it was moved to Java eclipse project folder
+WoodItem.Java was modified once on Aug 24, 2015.  It was also moved on Feb 17
+(e)Git log shows a history of commits made to the repository.  Git status shows changes that still need to be commited.
+(f)git log -- "main.java"
+(g)git log --grep "transaction"
+(h)git log --since="2016-01-05" --before="2016-02-16 --author=Lauren
