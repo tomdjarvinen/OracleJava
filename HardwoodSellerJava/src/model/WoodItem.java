@@ -28,9 +28,9 @@ public class WoodItem {
 	 * @param daseDeliveryTime base delivery time
 	 * @param price price per Bare Foot
 	 */
-	public WoodItem(String type, Double daseDeliveryTime, Double price) {
+	public WoodItem(String type, Double baseDeliveryTime, Double price) {
 		this.type = type;
-		this.baseDeliveryTime = daseDeliveryTime;
+		this.baseDeliveryTime = baseDeliveryTime;
 		this.price = price;
 	}
 

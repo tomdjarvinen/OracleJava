@@ -4,9 +4,12 @@
 package controller;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
-
-import model.WoodItem;
+import java.util.Scanner;
+import model.*;
 
 /**
  * @author Esteban
@@ -20,6 +23,7 @@ public class HardwoodSeller {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		woodTypes = new ArrayList<WoodItem>();
 		woodTypes.add(new WoodItem("Cherry", 2.5, 5.95));
 		woodTypes.add(new WoodItem("Curly Maple", 1.5, 6.00));
 		woodTypes.add(new WoodItem("Genuine Mahogany", 3.0, 9.60));
@@ -29,8 +33,8 @@ public class HardwoodSeller {
 
 	}
 	
-	public void readInputFile(String inputFilePath){
-		
+	public static void readInputFile(String inputFilePath) {
+
 	}
 	
 	public Double deliveryTime(){
