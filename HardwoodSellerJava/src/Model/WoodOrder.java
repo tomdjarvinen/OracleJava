@@ -58,9 +58,9 @@ public class WoodOrder {
 	{
 		return deliveryTime;
 	}
-	public void setPrice(double priceIn)
+	public void setPrice(double rate)
 	{
-		price = priceIn;
+		price = boardFeet*rate;
 	}
 	public void setTime(double time)
 	{

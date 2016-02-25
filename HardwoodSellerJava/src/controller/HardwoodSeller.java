@@ -30,33 +30,48 @@ public class HardwoodSeller {
 		woodTypes.add(new WoodItem("Wenge", 5., 22.35));
 		woodTypes.add(new WoodItem("White Oak", 2.3, 6.70));
 		woodTypes.add(new WoodItem("Sawdust", 1., 1.5));
-		
+		System.out.print("Enter a file path: ");
+		Scanner a = new Scanner(System.in);
+		String fileName = a.nextLine();
 		try {
-			readInputFile("testOrder.txt");
+			readInputFile(fileName);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	
+	//processes order found in inputFilePath
 	public static void readInputFile(String inputFilePath) throws FileNotFoundException{
-
+//needs error detection for type mismatch
 		Scanner input = new Scanner(new File(inputFilePath)).useDelimiter(";");
 		String name = input.next();
 		String address = input.next();
+		//need to advance past the semicolon
+		input.useDelimiter("\\p{Alnum}");
+		input.next();
 		String date = input.nextLine();
 	
 		ArrayList<WoodOrder> orders = new ArrayList<WoodOrder>();
+		input.useDelimiter("\\p{Punct}");
+		double priceTotal = 0;
 		while(input.hasNext())
 		{
-			input.useDelimiter("\\p{Punct}");
 			orders.add(new WoodOrder(input.next(), input.nextInt()));
+			//sets price of most recent order using rate from WoodOrder
+			orders.get(orders.size()-1).setPrice(woodTypes.get(matchType(orders.get(orders.size()-1))).getPrice());
+			priceTotal += orders.get(orders.size()-1).getPrice();
 		}
 		double delivery = deliveryTime(orders);
-		System.out.print(delivery);
+		System.out.printf("Name: " + name + "\nDelivery address: " + address
+				+ "\nDate: " + date + "\nEstimated delivery time: " + delivery + " hours\nTotal price: $%.2f\n", priceTotal);
+		for(int i = 0; i<orders.size(); i++)
+		{
+			WoodOrder temp = orders.get(i);
+			System.out.printf("Item " + (i+1) + ": " +temp.getType() + ";" + temp.getFeet() + " BF;$%.2f\n", orders.get(i).getPrice());
+		}
 	}
-	//returns estimated delivery time for a set of items to be ordered.
+	//returns estimated delivery time for an order.
 	public static Double deliveryTime(ArrayList<WoodOrder> items){
 		Double deliveryETA = 0.0;
 		for(int i = 0; i < items.size();i++ )
@@ -74,12 +89,12 @@ public class HardwoodSeller {
 		}
 		return deliveryETA;
 	}
+	//returns the index of woodTypes that shares a type with parameter order.
 	public static int matchType(WoodOrder order)
 	{
 		for(int i=0; i < woodTypes.size(); i++)
 		{
-			System.out.println(order.getType() + ":"+ woodTypes.get(i).getType());
-			if(order.getType().equalsIgnoreCase(woodTypes.get(i).getType()));
+			if(order.getType().equalsIgnoreCase(woodTypes.get(i).getType()))
 			{
 				return i;
 			}	
